@@ -1,11 +1,12 @@
 package com.nickolasantunes.todosimple.services;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.nickolasantunes.todosimple.models.User;
 import com.nickolasantunes.todosimple.repositories.UserRepository;
+import com.nickolasantunes.todosimple.services.exceptions.DataBindingViolationException;
+import com.nickolasantunes.todosimple.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class UserService {
@@ -18,19 +19,14 @@ public class UserService {
     public User findById(Long id) {
         Optional<User> user = this.userRepository.findById(id); 
 
-        return user.orElseThrow(() -> new RuntimeException("Usuário não encontrado. Id:" + id + ", Tipo: " +  User.class.getName()));
+        return user.orElseThrow(() -> new ObjectNotFoundException("Usuário não encontrado. Id:" + id + ", Tipo: " +  User.class.getName()));
     }
 
     @Transactional
     public User create(User obj) {
-        try{
-            obj.setId(null);
-             this.userRepository.save(obj);
-            return obj;
-        }
-        catch(DataIntegrityViolationException dataIntegrityViolationException){
-            throw new RuntimeException("ERRO usúario já existente.");
-        }
+        obj.setId(null);
+        this.userRepository.save(obj);
+        return obj;
     }
 
     @Transactional
@@ -42,14 +38,14 @@ public class UserService {
 
   
     public void delete(Long id) {
-        findById(id);
         try {
+            findById(id);
             this.userRepository.deleteById(id);
-        } catch (Exception e) {
-            throw new RuntimeException("Não é possivel excluir pois há entidades relacionadas!");
         }
+        catch(Exception ex) {
+            throw new DataBindingViolationException("Não é possivel deletar pois há entidades relacionadas");
+        }
+
     }   
-
-
 
 }

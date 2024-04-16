@@ -3,6 +3,8 @@ package com.nickolasantunes.todosimple.services;
 import java.util.List;
 import java.util.Optional;
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.nickolasantunes.todosimple.models.Task;
 import com.nickolasantunes.todosimple.models.User;
 import com.nickolasantunes.todosimple.repositories.TaskRepository;
+import com.nickolasantunes.todosimple.services.exceptions.DataBindingViolationException;
+import com.nickolasantunes.todosimple.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class TaskService {
@@ -22,7 +26,7 @@ public class TaskService {
 
     public Task findById(Long id) {
         Optional<Task> task = this.taskRepository.findById(id);
-        return task.orElseThrow(() -> new RuntimeException("ERROR: Tarefa não encontrada." + " Id: " + id + " Tipo: " + Task.class.getName()));
+        return task.orElseThrow(() -> new ObjectNotFoundException("ERROR: Tarefa não encontrada." + " Id: " + id + " Tipo: " + Task.class.getName()));
     }
 
     public List<Task> findAllByUserId(Long userId) {
@@ -53,7 +57,7 @@ public class TaskService {
             taskRepository.deleteById(id);
         }
         catch(Exception ex){
-            throw new RuntimeException("Não é possivel deletar pois há entidades relacionadas");
+            throw new DataBindingViolationException("Não é possivel deletar pois há entidades relacionadas");
         }
         
     }

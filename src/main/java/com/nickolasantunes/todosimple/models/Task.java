@@ -1,4 +1,4 @@
-package com.lucasangelo.todosimple.models;
+package com.nickolasantunes.todosimple.models;
 
 import java.util.Objects;
 

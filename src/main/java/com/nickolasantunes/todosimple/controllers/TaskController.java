@@ -1,4 +1,4 @@
-package com.lucasangelo.todosimple.controllers;
+package com.nickolasantunes.todosimple.controllers;
 
 import java.net.URI;
 import java.util.List;
@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.lucasangelo.todosimple.models.Task;
-import com.lucasangelo.todosimple.services.TaskService;
-import com.lucasangelo.todosimple.services.UserService;
+import com.nickolasantunes.todosimple.models.Task;
+import com.nickolasantunes.todosimple.services.TaskService;
+import com.nickolasantunes.todosimple.services.UserService;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;

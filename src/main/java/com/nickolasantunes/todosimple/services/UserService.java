@@ -1,11 +1,11 @@
-package com.lucasangelo.todosimple.services;
+package com.nickolasantunes.todosimple.services;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.lucasangelo.todosimple.models.User;
-import com.lucasangelo.todosimple.repositories.UserRepository;
+import com.nickolasantunes.todosimple.models.User;
+import com.nickolasantunes.todosimple.repositories.UserRepository;
 
 @Service
 public class UserService {
@@ -25,7 +25,7 @@ public class UserService {
     public User create(User obj) {
         try{
             obj.setId(null);
-            this.userRepository.save(obj);
+             this.userRepository.save(obj);
             return obj;
         }
         catch(DataIntegrityViolationException dataIntegrityViolationException){

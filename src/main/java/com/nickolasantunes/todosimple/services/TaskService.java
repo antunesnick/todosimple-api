@@ -1,4 +1,4 @@
-package com.lucasangelo.todosimple.services;
+package com.nickolasantunes.todosimple.services; 
 
 import java.util.List;
 import java.util.Optional;
@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.lucasangelo.todosimple.models.Task;
-import com.lucasangelo.todosimple.models.User;
-import com.lucasangelo.todosimple.repositories.TaskRepository;
+import com.nickolasantunes.todosimple.models.Task;
+import com.nickolasantunes.todosimple.models.User;
+import com.nickolasantunes.todosimple.repositories.TaskRepository;
 
 @Service
 public class TaskService {

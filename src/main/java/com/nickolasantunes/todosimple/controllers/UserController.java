@@ -1,4 +1,4 @@
-package com.lucasangelo.todosimple.controllers;
+package com.nickolasantunes.todosimple.controllers;
 
 
 
@@ -19,10 +19,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.lucasangelo.todosimple.models.User;
-import com.lucasangelo.todosimple.models.User.CreateUser;
-import com.lucasangelo.todosimple.models.User.UptadeUser;
-import com.lucasangelo.todosimple.services.UserService;
+import com.nickolasantunes.todosimple.models.User;
+import com.nickolasantunes.todosimple.models.User.CreateUser;
+import com.nickolasantunes.todosimple.models.User.UptadeUser;
+import com.nickolasantunes.todosimple.services.UserService;
 
 @RestController
 @RequestMapping("/user")

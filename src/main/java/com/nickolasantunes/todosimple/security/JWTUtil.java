@@ -14,22 +14,21 @@ import io.jsonwebtoken.security.Keys;
 
 @Component
 public class JWTUtil {
-    
+
     @Value("${jwt.secret}")
     private String secret;
 
     @Value("${jwt.expiration}")
-    private String expiration;
+    private Long expiration;
 
     public String generateToken(String username) {
         SecretKey key = getKeyBySecret();
         return Jwts.builder()
-            .setSubject(username)
-            .setExpiration(new Date(System.currentTimeMillis() + this.expiration))
-            .signWith(key)
-            .compact();
+                .setSubject(username)
+                .setExpiration(new Date(System.currentTimeMillis() + this.expiration))
+                .signWith(key)
+                .compact();
     }
-
 
     private SecretKey getKeyBySecret() {
         SecretKey key = Keys.hmacShaKeyFor(this.secret.getBytes());
@@ -38,11 +37,11 @@ public class JWTUtil {
 
     public boolean isValidToken(String token) {
         Claims claims = getClaims(token);
-        if(Objects.nonNull(claims)) {
+        if (Objects.nonNull(claims)) {
             String username = claims.getSubject();
             Date expirationDate = claims.getExpiration();
             Date now = new Date(System.currentTimeMillis());
-            if(Objects.nonNull(username) && Objects.nonNull(expirationDate) && now.before(expirationDate))
+            if (Objects.nonNull(username) && Objects.nonNull(expirationDate) && now.before(expirationDate))
                 return true;
         }
         return false;
@@ -52,8 +51,7 @@ public class JWTUtil {
         SecretKey key = getKeyBySecret();
         try {
             return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             return null;
         }
     }

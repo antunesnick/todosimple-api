@@ -1,6 +1,7 @@
 package com.nickolasantunes.todosimple.security;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.servlet.FilterChain;
@@ -18,7 +19,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nickolasantunes.todosimple.exceptions.GlobalExceptionHandler;
 import com.nickolasantunes.todosimple.models.User;
 
-import io.jsonwebtoken.io.IOException;
+
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
@@ -43,8 +44,8 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
             Authentication authentication = this.authenticationManager.authenticate(authToken);
             return authentication;
-        } catch (Exception e) {
-            throw new RuntimeException();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
